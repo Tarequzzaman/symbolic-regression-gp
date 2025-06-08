@@ -5,37 +5,29 @@ digraph {
 	n0 -> n0_0
 	n0_0 [label=<built-in function add>]
 	n0_0 -> n0_0_0
-	n0_0_0 [label=<built-in function add>]
+	n0_0_0 [label=<function _protected_div at 0x104823740>]
 	n0_0_0 -> n0_0_0_0
-	n0_0_0_0 [label=x]
+	n0_0_0_0 [label=<built-in function add>]
+	n0_0_0_0 -> n0_0_0_0_0
+	n0_0_0_0_0 [label=x]
+	n0_0_0_0 -> n0_0_0_0_1
+	n0_0_0_0_1 [label=<function _protected_div at 0x104823740>]
+	n0_0_0_0_1 -> n0_0_0_0_1_0
+	n0_0_0_0_1_0 [label=y]
+	n0_0_0_0_1 -> n0_0_0_0_1_1
+	n0_0_0_0_1_1 [label=3.8860955642999286]
 	n0_0_0 -> n0_0_0_1
-	n0_0_0_1 [label=<built-in function sub>]
-	n0_0_0_1 -> n0_0_0_1_0
-	n0_0_0_1_0 [label=<built-in function add>]
-	n0_0_0_1_0 -> n0_0_0_1_0_0
-	n0_0_0_1_0_0 [label=x]
-	n0_0_0_1_0 -> n0_0_0_1_0_1
-	n0_0_0_1_0_1 [label=-0.6103328590732016]
-	n0_0_0_1 -> n0_0_0_1_1
-	n0_0_0_1_1 [label=<function _protected_div at 0x10b8fb740>]
-	n0_0_0_1_1 -> n0_0_0_1_1_0
-	n0_0_0_1_1_0 [label=x]
-	n0_0_0_1_1 -> n0_0_0_1_1_1
-	n0_0_0_1_1_1 [label=x]
+	n0_0_0_1 [label=1.2268502713336353]
 	n0_0 -> n0_0_1
-	n0_0_1 [label=y]
+	n0_0_1 [label=<built-in function add>]
+	n0_0_1 -> n0_0_1_0
+	n0_0_1_0 [label=x]
+	n0_0_1 -> n0_0_1_1
+	n0_0_1_1 [label=<function _protected_div at 0x104823740>]
+	n0_0_1_1 -> n0_0_1_1_0
+	n0_0_1_1_0 [label=x]
+	n0_0_1_1 -> n0_0_1_1_1
+	n0_0_1_1_1 [label=3.8860955642999286]
 	n0 -> n0_1
-	n0_1 [label=<function _protected_div at 0x10b8fb740>]
-	n0_1 -> n0_1_0
-	n0_1_0 [label=<built-in function add>]
-	n0_1_0 -> n0_1_0_0
-	n0_1_0_0 [label=y]
-	n0_1_0 -> n0_1_0_1
-	n0_1_0_1 [label=2.646772776227298]
-	n0_1 -> n0_1_1
-	n0_1_1 [label=<function _protected_div at 0x10b8fb740>]
-	n0_1_1 -> n0_1_1_0
-	n0_1_1_0 [label=4.055288749351]
-	n0_1_1 -> n0_1_1_1
-	n0_1_1_1 [label=3.0137430352393277]
+	n0_1 [label=3.9636592880183503]
 }
