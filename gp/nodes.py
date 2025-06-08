@@ -25,7 +25,10 @@ PRIMITIVES: dict[str, Tuple[Callable[..., float], int]] = {
 TERMINALS = ("x", "y")  # constants are injected on‑the‑fly
 
 
-class Node:  # noqa: D101
+class Node: 
+    """Base class for all nodes in the expression tree."""
+
+    
     def evaluate(self, x: float, y: float) -> float:  # noqa: D401
         raise NotImplementedError
 
@@ -45,39 +48,50 @@ class Node:  # noqa: D101
 
 class FunctionNode(Node):  # noqa: D101
     def __init__(self, func_token: str, children: Sequence[Node]):
+        """Create a function node with the given token and children."""
+
         self.func_token = func_token
         self.func, self.arity = PRIMITIVES[func_token]
         assert len(children) == self.arity, "Arity mismatch"
         self.children: List[Node] = list(children)
 
-    # ‑‑‑ Node interface‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑
     def evaluate(self, x: float, y: float) -> float:  # noqa: D401
+        """Evaluate the function node with given x and y values."""
+
         args = [child.evaluate(x, y) for child in self.children]
         return self.func(*args)
 
     def clone(self) -> "FunctionNode":
+        """Return a deep clone of this function node."""
         return FunctionNode(self.func_token, [c.clone() for c in self.children])
 
     def depth(self) -> int:
+        """Return the depth of this node in the tree."""
         return 1 + max(c.depth() for c in self.children)
 
     def iter_subtrees(self):
+        """Yield (parent, index_in_parent, subtree) for each subtree."""
         for child_idx, child in enumerate(self.children):
             yield self, child_idx, child
             yield from child.iter_subtrees()
 
     def __str__(self):
+        """Return a string representation of this function node."""
         if self.arity == 1:
             return f"{self.func_token}({self.children[0]})"
         left, right = self.children
         return f"({left} {self.func_token} {right})"
 
 
-class TerminalNode(Node):  # noqa: D101
+class TerminalNode(Node): 
+    """A terminal node representing a variable or constant in the expression tree."""
+
     def __init__(self, value: Union[str, float]):
+        """Create a terminal node with the given value."""
         self.value = value  # either "x", "y" or a constant
 
-    def evaluate(self, x: float, y: float) -> float:  # noqa: D401
+    def evaluate(self, x: float, y: float) -> float:  
+        """Evaluate the terminal node with given x and y values."""
         if self.value == "x":
             return x
         if self.value == "y":
@@ -85,9 +99,11 @@ class TerminalNode(Node):  # noqa: D101
         return float(self.value)
 
     def clone(self) -> "TerminalNode":
+        """Return a deep clone of this terminal node."""
         return TerminalNode(self.value)
 
     def depth(self) -> int:
+        """Return the depth of this terminal node in the tree."""
         return 0
 
     def iter_subtrees(self):
@@ -104,6 +120,7 @@ class TerminalNode(Node):  # noqa: D101
 
 
 def _random_terminal(constant_range: Tuple[float, float]) -> TerminalNode:
+    """Return a random terminal node, either a variable or a constant."""
     if random.random() < 0.5:  # 50 %: variable
         return TerminalNode(random.choice(TERMINALS))
     # else constant
