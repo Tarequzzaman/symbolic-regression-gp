@@ -2,7 +2,13 @@
 """Convenience entry‑point: `python main.py` runs GP with defaults."""
 import argparse
 from gp import run_gp, load_default_dataset, plot_surface
-from gp.visualisation import save_tree_graphviz
+from gp.visualisation import (
+    save_flowchart,
+    save_tree_graphviz,
+    save_crossover_plt,
+    plot_surface,
+)
+
 
 if __name__ == "__main__":
     
@@ -32,5 +38,5 @@ if __name__ == "__main__":
     if len(dataset) > 8:
         plot_surface(best, dataset)
 
-        
+    save_flowchart()
     save_tree_graphviz(best, filename="best_tree")
